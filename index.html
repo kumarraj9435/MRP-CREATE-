@@ -120,36 +120,58 @@
 
         .label-card {
             border: 1px solid #000;
-            padding: 3mm;
-            font-size: 7px;
+            padding: 2.5mm;
+            font-size: 6.5px;
             line-height: 1.4;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
             overflow: hidden;
         }
 
-        .label-card .brand-name {
-            font-size: 11px;
-            font-weight: 900;
+        /* UNIGEN Logo Style - matching the image */
+        .label-card .logo-container {
             text-align: center;
-            letter-spacing: 2px;
-            border-bottom: 1px solid #000;
+            margin-bottom: 1.5px;
             padding-bottom: 2px;
-            margin-bottom: 2px;
+            border-bottom: 1.5px solid #000;
         }
 
-        .label-card .brand-sub {
-            font-size: 6px;
+        .label-card .logo-text {
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: #000;
+            font-family: Arial Black, Arial, sans-serif;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+        }
+
+        .label-card .logo-text .logo-icon {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid #000;
+            border-radius: 50%;
             text-align: center;
-            color: #333;
-            margin-bottom: 2px;
+            line-height: 10px;
+            font-size: 8px;
+            font-weight: 900;
+            position: relative;
+        }
+
+        .label-card .brand-line {
+            font-size: 6.5px;
+            font-weight: 700;
+            margin: 1px 0;
         }
 
         .label-card .label-row {
             display: flex;
             justify-content: space-between;
-            padding: 0.5px 0;
+            padding: 0.3px 0;
         }
 
         .label-card .label-key {
@@ -163,30 +185,26 @@
         }
 
         .label-card .mrp-line {
-            font-size: 8px;
+            font-size: 7.5px;
             font-weight: 900;
-            text-align: center;
-            padding: 2px 0;
-            border: 1px solid #000;
-            margin: 2px 0;
-            background: #f5f5f5;
+            text-align: left;
+            padding: 1.5px 0;
+            margin: 1px 0;
         }
 
-        .label-card .footer-info {
+        .label-card .company-info {
             font-size: 5.5px;
-            text-align: center;
-            border-top: 1px solid #000;
-            padding-top: 2px;
-            margin-top: 2px;
             line-height: 1.3;
-            color: #333;
+            color: #000;
+            margin-top: 1px;
         }
 
-        .label-card .package-contents {
+        .label-card .package-line {
             font-size: 6px;
             font-weight: 700;
-            text-align: center;
-            margin-top: 1px;
+            margin-top: 1.5px;
+            border-top: 0.5px solid #000;
+            padding-top: 1.5px;
         }
 
         /* Print Styles */
@@ -239,10 +257,6 @@
                 <label>Package Contents</label>
                 <input type="text" id="packageContents" placeholder="e.g. 1x OTG" value="1x OTG">
             </div>
-            <div class="form-group full-width">
-                <label>Website URL (fixed)</label>
-                <input type="text" id="website" value="WWW.UNIGENLIFESTYLE.COM" readonly style="background:#f0f0f0;">
-            </div>
         </div>
         <button class="btn btn-generate" onclick="generateLabels()">Generate 35 Labels (A4 Sheet)</button>
         <button class="btn btn-print" onclick="window.print()">🖨️ Print A4 Sheet</button>
@@ -251,7 +265,6 @@
     <!-- A4 Label Sheet -->
     <div class="a4-page" id="a4Page">
         <div class="label-grid" id="labelGrid">
-            <!-- 35 labels will be generated here -->
         </div>
     </div>
 
@@ -270,8 +283,10 @@
                 const label = document.createElement('div');
                 label.className = 'label-card';
                 label.innerHTML = `
-                    <div class="brand-name">UNIGEN</div>
-                    <div class="brand-sub">Brand Name: UNIGEN</div>
+                    <div class="logo-container">
+                        <span class="logo-text"><span class="logo-icon">U</span> UNIGEN</span>
+                    </div>
+                    <div class="brand-line">Brand Name: UNIGEN</div>
                     <div class="label-row">
                         <span class="label-key">Product Name:</span>
                         <span class="label-value">${productName}</span>
@@ -281,12 +296,12 @@
                         <span class="label-value">${netQty}</span>
                     </div>
                     <div class="mrp-line">M.R.P: ₹${productMRP}/- (Inclusive all taxes)</div>
-                    <div class="footer-info">
+                    <div class="company-info">
                         Genuine Innovations Private Limited<br>
                         WWW.UNIGENLIFESTYLE.COM<br>
                         support@unigenlifestyle.com
                     </div>
-                    <div class="package-contents">Package Contents:<br>${packageContents}</div>
+                    <div class="package-line">Package Contents:<br>${packageContents}</div>
                 `;
                 grid.appendChild(label);
             }
