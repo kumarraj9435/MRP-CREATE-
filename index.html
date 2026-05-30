@@ -119,7 +119,7 @@
         }
 
         .label-card {
-            border: 1px solid #000;
+            border: 1.5px solid #000;
             padding: 2.5mm;
             font-size: 6.5px;
             line-height: 1.4;
@@ -129,49 +129,57 @@
             overflow: hidden;
         }
 
-        /* UNIGEN Logo Style - matching the image */
+        /* UNIGEN Logo - SVG style matching the actual logo image */
         .label-card .logo-container {
             text-align: center;
-            margin-bottom: 1.5px;
+            margin-bottom: 2px;
             padding-bottom: 2px;
-            border-bottom: 1.5px solid #000;
         }
 
-        .label-card .logo-text {
-            font-size: 12px;
-            font-weight: 900;
-            letter-spacing: 1px;
-            color: #000;
-            font-family: Arial Black, Arial, sans-serif;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 2px;
-        }
-
-        .label-card .logo-text .logo-icon {
-            display: inline-block;
-            width: 14px;
-            height: 14px;
-            border: 2px solid #000;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 10px;
-            font-size: 8px;
-            font-weight: 900;
-            position: relative;
+        .label-card .logo-container svg {
+            height: 13px;
+            width: auto;
         }
 
         .label-card .brand-line {
-            font-size: 6.5px;
-            font-weight: 700;
+            font-size: 6px;
+            text-align: center;
+            margin-bottom: 2px;
+            color: #000;
+        }
+
+        .label-card .product-section {
             margin: 1px 0;
+        }
+
+        .label-card .product-label {
+            font-size: 6px;
+            font-weight: 700;
+            color: #000;
+            display: flex;
+            gap: 3px;
+        }
+
+        .label-card .product-label .key {
+            white-space: nowrap;
+        }
+
+        .label-card .product-label .value {
+            font-weight: 700;
+        }
+
+        .label-card .product-name {
+            font-size: 7px;
+            font-weight: 900;
+            color: #000;
+            margin-top: 0px;
         }
 
         .label-card .label-row {
             display: flex;
             justify-content: space-between;
             padding: 0.3px 0;
+            font-size: 6px;
         }
 
         .label-card .label-key {
@@ -188,8 +196,8 @@
             font-size: 7.5px;
             font-weight: 900;
             text-align: left;
-            padding: 1.5px 0;
-            margin: 1px 0;
+            padding: 2px 0;
+            margin: 1.5px 0;
         }
 
         .label-card .company-info {
@@ -202,7 +210,7 @@
         .label-card .package-line {
             font-size: 6px;
             font-weight: 700;
-            margin-top: 1.5px;
+            margin-top: 2px;
             border-top: 0.5px solid #000;
             padding-top: 1.5px;
         }
@@ -269,6 +277,20 @@
     </div>
 
     <script>
+        // SVG Logo matching the UNIGEN brand logo (circle with UG + UNIGEN text)
+        const unigenLogoSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 30" height="13">
+            <g fill="#000">
+                <!-- Circle logo icon -->
+                <circle cx="15" cy="15" r="13" fill="none" stroke="#000" stroke-width="2.5"/>
+                <!-- U letter inside circle -->
+                <path d="M8 8v8c0 4 3 6.5 7 6.5s7-2.5 7-6.5V8h-3v8c0 2.2-1.8 3.5-4 3.5S11 18.2 11 16V8H8z"/>
+                <!-- G overlay -->
+                <path d="M16 13h5v6c-1.5 1.5-3.5 2.5-6 2.5-4.5 0-7-3-7-6.5s2.5-6.5 7-6.5c2.5 0 4.5 1 5.5 2.5l-2 1.5c-0.8-1-2-1.7-3.5-1.7-2.8 0-4.5 2-4.5 4.2s1.7 4.2 4.5 4.2c1.5 0 2.5-0.5 3.5-1.2V15h-3v-2z" transform="translate(0,0) scale(0.45)" opacity="0"/>
+                <!-- UNIGEN text -->
+                <text x="34" y="20" font-family="Arial Black, Arial" font-size="18" font-weight="900" letter-spacing="1.5">UNIGEN</text>
+            </g>
+        </svg>`;
+
         function generateLabels() {
             const productName = document.getElementById('productName').value || 'C TO AUX OTG ADAPTER';
             const productMRP = document.getElementById('productMRP').value || '999';
@@ -284,12 +306,12 @@
                 label.className = 'label-card';
                 label.innerHTML = `
                     <div class="logo-container">
-                        <span class="logo-text"><span class="logo-icon">U</span> UNIGEN</span>
+                        ${unigenLogoSVG}
                     </div>
                     <div class="brand-line">Brand Name: UNIGEN</div>
-                    <div class="label-row">
-                        <span class="label-key">Product Name:</span>
-                        <span class="label-value">${productName}</span>
+                    <div class="product-section">
+                        <div class="product-label"><span class="key">Product Name:</span></div>
+                        <div class="product-name">${productName}</div>
                     </div>
                     <div class="label-row">
                         <span class="label-key">Net Qty:</span>
