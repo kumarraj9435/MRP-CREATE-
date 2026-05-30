@@ -133,15 +133,32 @@
         .label-card .logo-container {
             text-align: center;
             margin-bottom: 2px;
-            padding-bottom: 0px;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #000;
         }
 
         .label-card .logo-container .logo-text {
             font-family: 'Arial Black', Arial, sans-serif;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 900;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             color: #000;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .label-card .logo-container .logo-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 14px;
+            height: 14px;
+            border: 2px solid #000;
+            border-radius: 50%;
+            font-size: 8px;
+            font-weight: 900;
+            font-family: Arial, sans-serif;
         }
 
         .label-card .brand-line {
@@ -286,7 +303,7 @@
                 label.className = 'label-card';
                 label.innerHTML = `
                     <div class="logo-container">
-                        <span class="logo-text">UNIGEN</span>
+                        <span class="logo-text"><span class="logo-icon">U</span>UNIGEN</span>
                     </div>
                     <div class="brand-line">Brand Name: UNIGEN</div>
                     <div class="product-row">
