@@ -135,7 +135,7 @@
             min-height: 297mm;
             background: #fff;
             margin: 20px auto;
-            padding: 5mm;
+            padding: 3mm;
             box-shadow: 0 2px 20px rgba(0,0,0,0.2);
             display: none;
         }
@@ -144,14 +144,14 @@
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             grid-template-rows: repeat(7, 1fr);
-            gap: 1.5mm;
+            gap: 0mm;
             width: 100%;
-            height: 287mm;
+            height: 291mm;
         }
 
         .label-card {
             border: 1.5px solid #000;
-            padding: 1.5mm 2mm;
+            padding: 1mm;
             font-size: 6px;
             line-height: 1.3;
             display: flex;
@@ -160,42 +160,46 @@
             overflow: hidden;
         }
 
-        /* Logo at top */
+        /* Logo at top - chipka hua, no padding */
         .label-card .logo-container {
             text-align: center;
-            margin-bottom: 1px;
-            padding-bottom: 0px;
+            margin: 0;
+            padding: 0;
         }
 
         .label-card .logo-container img {
-            height: 10px;
+            height: 11px;
             width: auto;
+            display: block;
+            margin: 0 auto;
         }
 
         .label-card .logo-container .logo-fallback {
             font-family: 'Arial Black', Arial, sans-serif;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 900;
             letter-spacing: 2px;
             color: #000;
         }
 
+        /* Brand Name - product ke upar */
         .label-card .brand-line {
-            font-size: 6.5px;
-            text-align: center;
-            margin-bottom: 1px;
+            font-size: 6px;
+            text-align: left;
+            margin: 1px 0;
             color: #000;
             font-weight: 700;
         }
 
-        /* Product Name - table style like image */
+        /* Product table */
         .label-card .product-table {
             width: 100%;
-            margin: 1px 0;
+            margin: 0;
+            border-collapse: collapse;
         }
 
         .label-card .product-table td {
-            font-size: 6.5px;
+            font-size: 6px;
             vertical-align: top;
             padding: 0;
         }
@@ -203,38 +207,41 @@
         .label-card .product-table .td-key {
             font-weight: 700;
             white-space: nowrap;
-            width: 38%;
+            width: 40%;
             color: #000;
         }
 
         .label-card .product-table .td-value {
             font-weight: 400;
             color: #000;
-            width: 62%;
+            width: 60%;
         }
 
+        /* MRP - bold */
         .label-card .mrp-line {
             font-size: 7px;
             font-weight: 900;
             text-align: center;
             padding: 1.5px 0;
-            margin: 1.5px 0;
+            margin: 1px 0;
             border: 1.5px solid #000;
         }
 
+        /* Company info - left aligned chipka */
         .label-card .company-info {
             font-size: 5.5px;
-            line-height: 1.3;
+            line-height: 1.2;
             color: #000;
-            margin-top: 1px;
-            text-align: center;
+            margin: 1px 0;
+            text-align: left;
         }
 
+        /* Package Contents - left aligned chipka */
         .label-card .package-line {
             font-size: 6px;
             font-weight: 700;
-            margin-top: 1px;
-            text-align: center;
+            margin: 0;
+            text-align: left;
         }
 
         /* Print Styles */
@@ -253,14 +260,14 @@
                 display: block !important;
                 width: 210mm;
                 height: 297mm;
-                padding: 5mm;
+                padding: 3mm;
                 box-shadow: none;
                 margin: 0;
                 page-break-after: always;
             }
 
             .label-grid {
-                height: 287mm;
+                height: 291mm;
             }
         }
     </style>
@@ -328,7 +335,6 @@
             const netQty = document.getElementById('netQty').value || '3 Pcs';
             const packageContents = document.getElementById('packageContents').value || 'Duster Pack of 3';
 
-            // Logo HTML - if uploaded use image, otherwise show text
             let logoHTML = '';
             if (uploadedLogoSrc) {
                 logoHTML = '<img src="' + uploadedLogoSrc + '" alt="UNIGEN">';
@@ -339,14 +345,11 @@
             const grid = document.getElementById('labelGrid');
             grid.innerHTML = '';
 
-            // Generate 35 labels (5 columns x 7 rows)
             for (let i = 0; i < 35; i++) {
                 const label = document.createElement('div');
                 label.className = 'label-card';
                 label.innerHTML = `
-                    <div class="logo-container">
-                        ${logoHTML}
-                    </div>
+                    <div class="logo-container">${logoHTML}</div>
                     <div class="brand-line">Brand Name: UNIGEN</div>
                     <table class="product-table">
                         <tr>
@@ -359,11 +362,7 @@
                         </tr>
                     </table>
                     <div class="mrp-line">M.R.P: &#8377;${productMRP}/- (Inclusive all taxes)</div>
-                    <div class="company-info">
-                        Genuine Innovations Private Limited<br>
-                        WWW.UNIGENLIFESTYLE.COM<br>
-                        support@unigenlifestyle.com
-                    </div>
+                    <div class="company-info">Genuine Innovations Private Limited<br>WWW.UNIGENLIFESTYLE.COM<br>support@unigenlifestyle.com</div>
                     <div class="package-line">Package Contents:<br>${packageContents}</div>
                 `;
                 grid.appendChild(label);
@@ -373,7 +372,6 @@
             document.getElementById('a4Page').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Auto-generate on page load
         window.onload = function() {
             generateLabels();
         };
