@@ -67,6 +67,37 @@
             grid-column: 1 / -1;
         }
 
+        .logo-upload-section {
+            margin-bottom: 15px;
+            padding: 12px;
+            border: 2px dashed #007bff;
+            border-radius: 8px;
+            text-align: center;
+            background: #f8f9ff;
+        }
+
+        .logo-upload-section label {
+            font-weight: 700;
+            font-size: 13px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .logo-upload-section input[type="file"] {
+            margin-top: 8px;
+        }
+
+        .logo-preview {
+            margin-top: 8px;
+        }
+
+        .logo-preview img {
+            max-height: 40px;
+            border: 1px solid #ddd;
+            padding: 4px;
+            background: #fff;
+        }
+
         .btn {
             display: block;
             width: 100%;
@@ -129,7 +160,7 @@
             overflow: hidden;
         }
 
-        /* UNIGEN Logo Header */
+        /* Logo at top */
         .label-card .logo-container {
             text-align: center;
             margin-bottom: 2px;
@@ -137,28 +168,17 @@
             border-bottom: 1px solid #000;
         }
 
-        .label-card .logo-container .logo-text {
+        .label-card .logo-container img {
+            height: 14px;
+            width: auto;
+        }
+
+        .label-card .logo-container .logo-fallback {
             font-family: 'Arial Black', Arial, sans-serif;
             font-size: 12px;
             font-weight: 900;
             letter-spacing: 2px;
             color: #000;
-            display: inline-flex;
-            align-items: center;
-            gap: 3px;
-        }
-
-        .label-card .logo-container .logo-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 14px;
-            height: 14px;
-            border: 2px solid #000;
-            border-radius: 50%;
-            font-size: 8px;
-            font-weight: 900;
-            font-family: Arial, sans-serif;
         }
 
         .label-card .brand-line {
@@ -259,6 +279,15 @@
     <!-- Input Form -->
     <div class="no-print">
         <h1>UNIGEN - MRP Sticker Label Generator</h1>
+
+        <!-- Logo Upload Section -->
+        <div class="logo-upload-section">
+            <label for="logoUpload">Upload UNIGEN Logo (Optional):</label><br>
+            <input type="file" id="logoUpload" accept="image/*" onchange="previewLogo(this)">
+            <div class="logo-preview" id="logoPreview"></div>
+            <p style="font-size:11px; color:#666; margin-top:5px;">Agar logo upload nahi karoge toh "UNIGEN" text dikhega</p>
+        </div>
+
         <div class="form-grid">
             <div class="form-group">
                 <label>Product Name</label>
@@ -288,11 +317,33 @@
     </div>
 
     <script>
+        let uploadedLogoSrc = '';
+
+        function previewLogo(input) {
+            const preview = document.getElementById('logoPreview');
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedLogoSrc = e.target.result;
+                    preview.innerHTML = '<img src="' + uploadedLogoSrc + '" alt="Logo Preview">';
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
         function generateLabels() {
             const productName = document.getElementById('productName').value || 'Microfiber Cloth Duster 40*40CM (Pack Of 3)';
             const productMRP = document.getElementById('productMRP').value || '999';
             const netQty = document.getElementById('netQty').value || '3 Pcs';
             const packageContents = document.getElementById('packageContents').value || 'Duster Pack of 3';
+
+            // Logo HTML - if uploaded use image, otherwise show text
+            let logoHTML = '';
+            if (uploadedLogoSrc) {
+                logoHTML = '<img src="' + uploadedLogoSrc + '" alt="UNIGEN">';
+            } else {
+                logoHTML = '<span class="logo-fallback">UNIGEN</span>';
+            }
 
             const grid = document.getElementById('labelGrid');
             grid.innerHTML = '';
@@ -303,7 +354,7 @@
                 label.className = 'label-card';
                 label.innerHTML = `
                     <div class="logo-container">
-                        <span class="logo-text"><span class="logo-icon">U</span>UNIGEN</span>
+                        ${logoHTML}
                     </div>
                     <div class="brand-line">Brand Name: UNIGEN</div>
                     <div class="product-row">
