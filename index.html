@@ -13,7 +13,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background-color: #e8e8e8;
+            background-color: #f0f0f0;
             padding: 20px;
         }
 
@@ -63,10 +63,6 @@
             border-color: #007bff;
         }
 
-        .form-group.full-width {
-            grid-column: 1 / -1;
-        }
-
         .logo-upload-section {
             margin-bottom: 15px;
             padding: 12px;
@@ -74,13 +70,6 @@
             border-radius: 8px;
             text-align: center;
             background: #f8f9ff;
-        }
-
-        .logo-upload-section label {
-            font-weight: 700;
-            font-size: 13px;
-            color: #333;
-            cursor: pointer;
         }
 
         .logo-upload-section input[type="file"] {
@@ -93,9 +82,6 @@
 
         .logo-preview img {
             max-height: 40px;
-            border: 1px solid #ddd;
-            padding: 4px;
-            background: #fff;
         }
 
         .btn {
@@ -108,34 +94,20 @@
             font-weight: 700;
             cursor: pointer;
             margin-top: 15px;
-            transition: background 0.3s;
         }
 
-        .btn-generate {
-            background: #007bff;
-            color: #fff;
-        }
+        .btn-generate { background: #007bff; color: #fff; }
+        .btn-generate:hover { background: #0056b3; }
+        .btn-print { background: #28a745; color: #fff; }
+        .btn-print:hover { background: #1e7e34; }
 
-        .btn-generate:hover {
-            background: #0056b3;
-        }
-
-        .btn-print {
-            background: #28a745;
-            color: #fff;
-        }
-
-        .btn-print:hover {
-            background: #1e7e34;
-        }
-
-        /* A4 Page with Label Grid */
+        /* ===== A4 PAGE ===== */
         .a4-page {
             width: 210mm;
             min-height: 297mm;
             background: #fff;
             margin: 20px auto;
-            padding: 5mm;
+            padding: 10mm 8mm;
             box-shadow: 0 2px 20px rgba(0,0,0,0.2);
             display: none;
         }
@@ -143,239 +115,193 @@
         .label-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            grid-template-rows: repeat(7, 1fr);
             gap: 3mm;
             width: 100%;
-            height: 287mm;
         }
 
+        /* ===== EACH LABEL ===== */
         .label-card {
             border: 2px solid #000;
-            padding: 2mm 2.5mm;
-            font-size: 7.5px;
+            padding: 3mm;
+            font-family: Arial, sans-serif;
+            font-size: 8px;
             line-height: 1.5;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            gap: 2px;
-            overflow: hidden;
+            page-break-inside: avoid;
         }
 
-        /* Logo at top */
-        .label-card .logo-container {
+        .label-card .lbl-logo {
             text-align: center;
-            margin: 0 0 2px 0;
-            padding: 0;
+            padding-bottom: 3px;
+            margin-bottom: 3px;
         }
 
-        .label-card .logo-container img {
-            height: 14px;
+        .label-card .lbl-logo img {
+            height: 16px;
             width: auto;
-            display: block;
-            margin: 0 auto;
         }
 
-        .label-card .logo-container .logo-fallback {
+        .label-card .lbl-logo .logo-text {
             font-family: 'Arial Black', Arial, sans-serif;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 900;
             letter-spacing: 3px;
             color: #000;
         }
 
-        /* Brand Name */
-        .label-card .brand-line {
-            font-size: 7px;
+        .label-card .lbl-brand {
             text-align: center;
-            margin: 0 0 2px 0;
-            color: #000;
-            font-weight: 700;
-        }
-
-        /* Product table */
-        .label-card .product-table {
-            width: 100%;
-            margin: 0;
-            border-collapse: collapse;
-        }
-
-        .label-card .product-table td {
-            font-size: 7.5px;
-            vertical-align: top;
-            padding: 1px 0;
-        }
-
-        .label-card .product-table .td-key {
-            font-weight: 700;
-            white-space: nowrap;
-            width: 42%;
-            color: #000;
-        }
-
-        .label-card .product-table .td-value {
-            font-weight: 400;
-            color: #000;
-            width: 58%;
-        }
-
-        /* MRP - bold */
-        .label-card .mrp-line {
             font-size: 8px;
+            margin-bottom: 4px;
+        }
+
+        .label-card .lbl-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 4px;
+        }
+
+        .label-card .lbl-table td {
+            font-size: 8px;
+            padding: 1px 0;
+            vertical-align: top;
+        }
+
+        .label-card .lbl-table .lbl-key {
+            font-weight: 700;
+            width: 45%;
+        }
+
+        .label-card .lbl-table .lbl-val {
+            width: 55%;
+        }
+
+        .label-card .lbl-mrp {
+            font-size: 9px;
             font-weight: 900;
             text-align: center;
-            padding: 2px 0;
-            margin: 2px 0;
             border: 2px solid #000;
+            padding: 3px 2px;
+            margin: 4px 0;
         }
 
-        /* Company info */
-        .label-card .company-info {
-            font-size: 6.5px;
-            line-height: 1.4;
-            color: #000;
-            margin: 2px 0;
-            text-align: center;
-        }
-
-        /* Package Contents */
-        .label-card .package-line {
+        .label-card .lbl-company {
             font-size: 7px;
-            font-weight: 700;
-            margin: 0;
             text-align: center;
+            line-height: 1.4;
+            margin: 3px 0;
         }
 
-        /* Print Styles */
+        .label-card .lbl-package {
+            font-size: 8px;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 3px;
+        }
+
+        /* ===== PRINT ===== */
         @media print {
-            body {
-                background: #fff;
-                padding: 0;
-                margin: 0;
-            }
-
-            .no-print {
-                display: none !important;
-            }
-
+            body { background: #fff; padding: 0; margin: 0; }
+            .no-print { display: none !important; }
             .a4-page {
                 display: block !important;
                 width: 210mm;
-                height: 297mm;
-                padding: 5mm;
+                min-height: 297mm;
+                padding: 10mm 8mm;
                 box-shadow: none;
                 margin: 0;
                 page-break-after: always;
-            }
-
-            .label-grid {
-                height: 287mm;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Input Form -->
-    <div class="no-print">
-        <h1>UNIGEN - MRP Sticker Label Generator</h1>
+<div class="no-print">
+    <h1>UNIGEN - MRP Sticker Label Generator</h1>
 
-        <!-- Logo Upload Section -->
-        <div class="logo-upload-section">
-            <label for="logoUpload">Upload UNIGEN Logo (Optional):</label><br>
-            <input type="file" id="logoUpload" accept="image/*" onchange="previewLogo(this)">
-            <div class="logo-preview" id="logoPreview"></div>
-            <p style="font-size:11px; color:#666; margin-top:5px;">Agar logo upload nahi karoge toh "UNIGEN" text dikhega</p>
-        </div>
-
-        <div class="form-grid">
-            <div class="form-group">
-                <label>Product Name</label>
-                <input type="text" id="productName" placeholder="e.g. Microfiber Cloth Duster 40*40CM (Pack Of 3)" value="Microfiber Cloth Duster 40*40CM (Pack Of 3)">
-            </div>
-            <div class="form-group">
-                <label>MRP (₹)</label>
-                <input type="text" id="productMRP" placeholder="e.g. 999" value="999">
-            </div>
-            <div class="form-group">
-                <label>Net Qty</label>
-                <input type="text" id="netQty" placeholder="e.g. 3 Pcs" value="3 Pcs">
-            </div>
-            <div class="form-group">
-                <label>Package Contents</label>
-                <input type="text" id="packageContents" placeholder="e.g. Duster Pack of 3" value="Duster Pack of 3">
-            </div>
-        </div>
-        <button class="btn btn-generate" onclick="generateLabels()">Generate 35 Labels (A4 Sheet)</button>
-        <button class="btn btn-print" onclick="window.print()">Print A4 Sheet</button>
+    <div class="logo-upload-section">
+        <label><b>Upload UNIGEN Logo (Optional):</b></label><br>
+        <input type="file" id="logoUpload" accept="image/*" onchange="previewLogo(this)">
+        <div class="logo-preview" id="logoPreview"></div>
+        <p style="font-size:11px;color:#666;margin-top:5px;">Logo upload nahi karoge toh "UNIGEN" text dikhega</p>
     </div>
 
-    <!-- A4 Label Sheet -->
-    <div class="a4-page" id="a4Page">
-        <div class="label-grid" id="labelGrid">
+    <div class="form-grid">
+        <div class="form-group">
+            <label>Product Name</label>
+            <input type="text" id="productName" value="Microfiber Cloth Duster 40*40CM (Pack Of 3)">
+        </div>
+        <div class="form-group">
+            <label>MRP (₹)</label>
+            <input type="text" id="productMRP" value="999">
+        </div>
+        <div class="form-group">
+            <label>Net Qty</label>
+            <input type="text" id="netQty" value="3 Pcs">
+        </div>
+        <div class="form-group">
+            <label>Package Contents</label>
+            <input type="text" id="packageContents" value="Duster Pack of 3">
         </div>
     </div>
 
-    <script>
-        let uploadedLogoSrc = '';
+    <button class="btn btn-generate" onclick="generateLabels()">Generate Labels (A4 Sheet)</button>
+    <button class="btn btn-print" onclick="window.print()">Print A4 Sheet</button>
+</div>
 
-        function previewLogo(input) {
-            const preview = document.getElementById('logoPreview');
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    uploadedLogoSrc = e.target.result;
-                    preview.innerHTML = '<img src="' + uploadedLogoSrc + '" alt="Logo Preview">';
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
+<div class="a4-page" id="a4Page">
+    <div class="label-grid" id="labelGrid"></div>
+</div>
+
+<script>
+    let uploadedLogoSrc = '';
+
+    function previewLogo(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedLogoSrc = e.target.result;
+                document.getElementById('logoPreview').innerHTML = '<img src="' + uploadedLogoSrc + '">';
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function generateLabels() {
+        const productName = document.getElementById('productName').value || 'Microfiber Cloth Duster 40*40CM (Pack Of 3)';
+        const productMRP = document.getElementById('productMRP').value || '999';
+        const netQty = document.getElementById('netQty').value || '3 Pcs';
+        const packageContents = document.getElementById('packageContents').value || 'Duster Pack of 3';
+
+        let logoHTML = uploadedLogoSrc
+            ? '<img src="' + uploadedLogoSrc + '">'
+            : '<span class="logo-text">UNIGEN</span>';
+
+        const grid = document.getElementById('labelGrid');
+        grid.innerHTML = '';
+
+        for (let i = 0; i < 35; i++) {
+            const label = document.createElement('div');
+            label.className = 'label-card';
+            label.innerHTML =
+                '<div class="lbl-logo">' + logoHTML + '</div>' +
+                '<div class="lbl-brand">Brand Name: UNIGEN</div>' +
+                '<table class="lbl-table">' +
+                    '<tr><td class="lbl-key">Product Name:</td><td class="lbl-val">' + productName + '</td></tr>' +
+                    '<tr><td class="lbl-key">Net Qty:</td><td class="lbl-val">' + netQty + '</td></tr>' +
+                '</table>' +
+                '<div class="lbl-mrp">M.R.P: \u20B9' + productMRP + '/- (Inclusive all taxes)</div>' +
+                '<div class="lbl-company">Genuine Innovations Private Limited<br>WWW.UNIGENLIFESTYLE.COM<br>support@unigenlifestyle.com</div>' +
+                '<div class="lbl-package">Package Contents:<br>' + packageContents + '</div>';
+            grid.appendChild(label);
         }
 
-        function generateLabels() {
-            const productName = document.getElementById('productName').value || 'Microfiber Cloth Duster 40*40CM (Pack Of 3)';
-            const productMRP = document.getElementById('productMRP').value || '999';
-            const netQty = document.getElementById('netQty').value || '3 Pcs';
-            const packageContents = document.getElementById('packageContents').value || 'Duster Pack of 3';
+        document.getElementById('a4Page').style.display = 'block';
+        document.getElementById('a4Page').scrollIntoView({ behavior: 'smooth' });
+    }
 
-            let logoHTML = '';
-            if (uploadedLogoSrc) {
-                logoHTML = '<img src="' + uploadedLogoSrc + '" alt="UNIGEN">';
-            } else {
-                logoHTML = '<span class="logo-fallback">UNIGEN</span>';
-            }
+    window.onload = function() { generateLabels(); };
+</script>
 
-            const grid = document.getElementById('labelGrid');
-            grid.innerHTML = '';
-
-            for (let i = 0; i < 35; i++) {
-                const label = document.createElement('div');
-                label.className = 'label-card';
-                label.innerHTML = `
-                    <div class="logo-container">${logoHTML}</div>
-                    <div class="brand-line">Brand Name: UNIGEN</div>
-                    <table class="product-table">
-                        <tr>
-                            <td class="td-key">Product Name:</td>
-                            <td class="td-value">${productName}</td>
-                        </tr>
-                        <tr>
-                            <td class="td-key">Net Qty:</td>
-                            <td class="td-value">${netQty}</td>
-                        </tr>
-                    </table>
-                    <div class="mrp-line">M.R.P: &#8377;${productMRP}/- (Inclusive all taxes)</div>
-                    <div class="company-info">Genuine Innovations Private Limited<br>WWW.UNIGENLIFESTYLE.COM<br>support@unigenlifestyle.com</div>
-                    <div class="package-line">Package Contents:<br>${packageContents}</div>
-                `;
-                grid.appendChild(label);
-            }
-
-            document.getElementById('a4Page').style.display = 'block';
-            document.getElementById('a4Page').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        window.onload = function() {
-            generateLabels();
-        };
-    </script>
 </body>
 </html>
